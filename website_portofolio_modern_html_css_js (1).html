@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARDI — Visual Storyteller</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#020617;
+  --accent:#38bdf8;
+  --text:#e2e8f0;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:var(--bg);color:var(--text);overflow-x:hidden}
+
+header{
+  position:fixed;width:100%;top:0;padding:20px 60px;
+  display:flex;justify-content:space-between;
+  background:rgba(0,0,0,0.5);backdrop-filter:blur(10px);z-index:999
+}
+
+nav a{margin-left:25px;color:#94a3b8;text-decoration:none}
+
+/* HERO */
+.home{
+  height:100vh;display:flex;align-items:center;justify-content:center;
+  text-align:center;position:relative
+}
+
+.home video{
+  position:absolute;width:100%;height:100%;object-fit:cover;
+  filter:brightness(0.3);z-index:-1
+}
+
+.home h1{
+  font-size:65px;font-weight:800;
+  background:linear-gradient(90deg,#fff,#38bdf8);
+  -webkit-background-clip:text;color:transparent;
+}
+
+.typing{color:var(--accent)}
+
+section{padding:120px 60px}
+
+/* SKILL INTERACTIVE */
+.skills{
+  display:flex;gap:20px;flex-wrap:wrap;justify-content:center
+}
+
+.skill{
+  padding:15px 25px;border:1px solid #1e293b;border-radius:10px;
+  cursor:pointer;transition:.3s
+}
+
+.skill:hover{
+  background:var(--accent);color:black;transform:scale(1.1)
+}
+
+/* VIDEO SHOWCASE */
+.video-showcase{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px
+}
+
+.video-card{
+  position:relative;border-radius:15px;overflow:hidden;cursor:pointer
+}
+
+.video-card video{
+  width:100%;height:200px;object-fit:cover;transition:.4s
+}
+
+.video-card:hover video{transform:scale(1.2)}
+
+.video-card .overlay{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,0.5);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:.3s
+}
+
+.video-card:hover .overlay{opacity:1}
+
+.overlay span{
+  font-size:20px;background:var(--accent);color:black;padding:10px 15px;border-radius:8px
+}
+
+/* TIMELINE */
+.timeline{
+  border-left:2px solid var(--accent);padding-left:20px
+}
+
+.timeline div{
+  margin-bottom:20px
+}
+
+/* CONTACT */
+.kontak{text-align:center}
+
+footer{text-align:center;padding:30px;background:black}
+
+</style>
+</head>
+<body>
+
+<header>
+  <h2>ARDI</h2>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#tentang">Tentang</a>
+    <a href="#project">Project</a>
+    <a href="#kontak">Kontak</a>
+  </nav>
+</header>
+
+<section id="home" class="home">
+  <video autoplay muted loop>
+    <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4">
+  </video>
+  <div>
+    <h1>I Create <span class="typing"></span></h1>
+    <p>Video Editor • Dokumentasi • Storytelling</p>
+  </div>
+</section>
+
+<section id="tentang">
+  <h2>Tentang Saya</h2>
+  <p>Saya fokus di editing video dan dokumentasi visual dengan pendekatan cinematic storytelling.</p>
+
+  <h3 style="margin-top:40px;text-align:center">Skill</h3>
+  <div class="skills">
+    <div class="skill">Video Editing</div>
+    <div class="skill">Color Grading</div>
+    <div class="skill">Cinematic Shot</div>
+    <div class="skill">Photography</div>
+  </div>
+
+  <h3 style="margin-top:40px">Journey</h3>
+  <div class="timeline">
+    <div>📍 SMK DKV — Mulai belajar visual</div>
+    <div>🎬 Freelance — Dokumentasi event</div>
+    <div>🚀 Fokus Video Editing & Cinematic</div>
+  </div>
+</section>
+
+<section id="project">
+  <h2 style="text-align:center;margin-bottom:40px">Video Showcase</h2>
+
+  <div class="video-showcase">
+    <div class="video-card">
+      <video src="https://www.w3schools.com/html/mov_bbb.mp4" muted loop></video>
+      <div class="overlay"><span>Play</span></div>
+    </div>
+
+    <div class="video-card">
+      <video src="https://www.w3schools.com/html/movie.mp4" muted loop></video>
+      <div class="overlay"><span>Play</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="kontak" class="kontak">
+  <h2>Kontak</h2>
+  <p>Email: ardi@email.com</p>
+  <p>Instagram: @ardi</p>
+</section>
+
+<footer>
+  <p>© 2026 ARDI Visual</p>
+</footer>
+
+<script>
+// typing effect
+const words = ["Cinematic Video", "Storytelling", "Visual Experience"];
+let i=0,j=0,current='',isDeleting=false;
+
+function type(){
+  current = words[i];
+
+  if(isDeleting){
+    document.querySelector('.typing').textContent = current.substring(0,j--);
+  } else {
+    document.querySelector('.typing').textContent = current.substring(0,j++);
+  }
+
+  if(!isDeleting && j===current.length){
+    isDeleting=true;setTimeout(type,1000);return;
+  }
+
+  if(isDeleting && j===0){
+    isDeleting=false;i=(i+1)%words.length;
+  }
+
+  setTimeout(type, isDeleting?50:100);
+}
+
+type();
+
+// autoplay preview on hover
+document.querySelectorAll('.video-card video').forEach(v=>{
+  v.addEventListener('mouseenter',()=>v.play());
+  v.addEventListener('mouseleave',()=>v.pause());
+});
+</script>
+
+</body>
+</html>
